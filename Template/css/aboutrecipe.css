@@ -1,0 +1,17 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: purple;
+}
+
+.jumbotron {
+    background-repeat: no-repeat;
+    background-image: url('../images/jumboimage.jpg');
+    background-size: cover;
+    background-position: center;
+    color:lemonchiffon;
+}
+ 
+footer {
+    text-align: center;
+}
