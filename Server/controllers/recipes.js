@@ -30,6 +30,9 @@ class Recipe {
     recipeDb.push(response);
     res.status(200).send({ message: 'Recipe Successfully saved and created', response });
   }
+  static getRecipes(req, res) {
+    res.status(200).send(recipeDb);
+  }
 }
 
 export default Recipe;

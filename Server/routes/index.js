@@ -6,7 +6,8 @@ export default (app) => {
     res.send({ message: 'Welcome to the more-recipes Api' });
   });
 
-  app.post('/api/addrecipes', recipeController.addRecipe);
+  app.post('/api/recipes', recipeController.addRecipe);
+  app.get('/api/recipes', recipeController.getRecipes);
 };
 
 
