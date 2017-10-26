@@ -6,7 +6,7 @@ let idTracker = 0;
 
 
 class Recipe { 
-  addRecipe(req, res) {
+  static addRecipe(req, res) {
     const { recipeName, directions, ingredients } = req.body;
     const currentDate = '' + new Date();
     const createdAt = currentDate.slice(0, 24);
