@@ -8,6 +8,8 @@ export default (app) => {
 
   app.post('/api/recipes', recipeController.addRecipe);
   app.get('/api/recipes', recipeController.getRecipes);
+  app.delete('/api/recipes/:recipeDbid', recipeController.removeRecipes);
+  app.put('/api/recipes/:recipeDbid', recipeController.updateRecipes);
 };
 
 
