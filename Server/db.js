@@ -6,7 +6,7 @@ const recipes = [
     ingredients: "yam flour,okra,pepper",
     createdAt: "Fri Oct 27 2017 14:52:10",
     updatedAt: "Fri Oct 27 2017 14:52:10",
-    upvotes: 0,
+    upvotes: 5,
     downvotes: 0,
     reviews: "",
   },
