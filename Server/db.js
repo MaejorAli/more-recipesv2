@@ -8,7 +8,7 @@ const recipes = [
     updatedAt: "Fri Oct 27 2017 14:52:10",
     upvotes: 0,
     downvotes: 0,
-    reviews: ""
+    reviews: "",
   },
 ];
 

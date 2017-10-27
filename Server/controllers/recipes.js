@@ -13,7 +13,7 @@ class Recipe {
     const upvotes = 0;
     const downvotes = 0;
     const reviews = '';
-    idTracker += 1;
+    idTracker = db.length + 1;
     const id = idTracker;
     const response = {
       id,
