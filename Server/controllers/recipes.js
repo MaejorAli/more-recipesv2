@@ -34,6 +34,7 @@ class Recipe {
     for (let i = 0; i < db.length; i += 1) {
       if (db[i].id === parseFloat(req.params.recipeId)) {
         db.splice(i, 1);
+<<<<<<< HEAD
         res.status(200).send({ message: 'Recipe deleted', error: false });
       }
     }
@@ -45,6 +46,22 @@ class Recipe {
     db.map((rec) => {
       if (rec.id === id) {
         recipe = rec;
+=======
+        res.status(200).send({ message: 'Recipe deleted' });
+      }
+    }
+    res.status(404).send({ message: 'Recipe not Found' });
+  }
+
+  static updateRecipes(req, res) {
+    for (let i = 0; i < db.length; i += 1) {
+      if (db[i].id === parseFloat(req.params.recipeDbid)) {
+        db[i].recipeName = req.body.recipeName || db.recipeName;
+        db[i].image = req.body.image || db.image;
+        db[i].ingredients = req.body.ingredients || db.ingredients;
+        db[i].directions = req.body.directions || db.directions;
+        res.status(200).send({ message: 'Successfully Updated' });
+>>>>>>> 5a362650c8975b3f77bc4017383433c61f59fcb7
       }
       return recipe;
     });
@@ -57,6 +74,7 @@ class Recipe {
     } else {
       res.status(404).send({ message: 'Recipe not found', error: true });
     }
+<<<<<<< HEAD
   }
 
 
@@ -79,6 +97,9 @@ class Recipe {
       }
       res.status(200).send({ recipes: db, error: false });
     } else { res.status(200).send({ error: false, recipes: db }); }
+=======
+    res.status(404).send({ message: ' Not Found' });
+>>>>>>> 5a362650c8975b3f77bc4017383433c61f59fcb7
   }
 }
 export default Recipe;
