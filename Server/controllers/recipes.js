@@ -34,9 +34,10 @@ class Recipe {
     for (let i = 0; i < db.length; i += 1) {
       if (db[i].id === parseFloat(req.params.recipeId)) {
         db.splice(i, 1);
-        res.status(200).send({ message: 'Recipe deleted', error: false });
+        return res.status(200).send({ message: 'Recipe deleted', error: false });
       }
     }
+    return res.status(404).send({ message: 'Not Found', error: true });
   }
 
   static updateRecipes(req, res) {
