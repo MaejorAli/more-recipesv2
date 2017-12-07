@@ -51,9 +51,9 @@ const checkInvalidReview = (req, res, next) => {
   }
   let isUndefined = false;
   let isNull = false;
-  const { message } = req.body;
+  const { reviews } = req.body;
   const { recipeId } = req.params;
-  [message, recipeId].forEach((params) => {
+  [reviews, recipeId].forEach((params) => {
     if (params === undefined) {
       isUndefined = true;
     }
@@ -69,7 +69,7 @@ const checkInvalidReview = (req, res, next) => {
   if (isNull) {
     return res.status(400).send({ error: 'Your review cannot be empty text' });
   }
-  if (!isUndefined && !alphaNumeric(message) && Number.isInteger(parseFloat(message))) {
+  if (!isUndefined && !alphaNumeric(reviews) && Number.isInteger(parseFloat(reviews))) {
     return res.status(400).send({ error: 'Your reviews should be text and not numbers' });
   }
   return next();
@@ -115,7 +115,7 @@ const checkInvalidModification = (req, res, next) => {
     return res.status(400).send({ error: 'A field does not contain any input' });
   }
   if (!isString) {
-    return res.status(400).send({ error: 'Only text can be inputed' });
+    return res.status(400).send({ error: 'Only texts can be inputed' });
   }
   return next();
 };

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./server/bin/www --exec babel-node ./server/bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./server/tests/test.js"
   },
   "repository": {
     "type": "git",
@@ -24,20 +24,28 @@
   "homepage": "https://github.com/MaejorAli/more-recipesv2#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "express": "^4.16.2",
+    "mocha": "^4.0.1",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.1",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.17.2"
+    "sequelize": "^4.17.2",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint-plugin-react": "^7.4.0",
+    "mocha": "^4.0.1",
+    "supertest": "^3.0.0"
   }
 }
