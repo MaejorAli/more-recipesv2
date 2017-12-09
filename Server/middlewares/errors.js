@@ -34,13 +34,13 @@ const checkNullInput = (req, res, next) => {
     }
   });
   if (isUndefined) {
-    return res.status(400).send({ error: 'Please fill in all fields' });
+    return res.status(400).send({ error: 'Invalid Input' });
   }
   if (isNull) {
     return res.status(400).send({ error: 'A field does not contain any input' });
   }
   if (!isString) {
-    return res.status(400).send({ error: 'Only texts can be inputed' });
+    return res.status(400).send({ error: 'Only text can be inputed' });
   }
   return next();
 };
@@ -115,7 +115,7 @@ const checkInvalidModification = (req, res, next) => {
     return res.status(400).send({ error: 'A field does not contain any input' });
   }
   if (!isString) {
-    return res.status(400).send({ error: 'Only texts can be inputed' });
+    return res.status(400).send({ error: 'Only text can be inputed' });
   }
   return next();
 };

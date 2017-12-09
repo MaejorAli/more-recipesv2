@@ -34,10 +34,10 @@ class Recipe {
     for (let i = 0; i < db.length; i += 1) {
       if (db[i].id === parseFloat(req.params.recipeId)) {
         db.splice(i, 1);
-        return res.status(200).send({ message: 'Recipe deleted', error: false });
+        return res.status(200).send({ message: 'recipe successfully deleted', error: false });
       }
     }
-    return res.status(404).send({ message: 'Not Found', error: true });
+    return res.status(404).send({ message: 'recipe you intended to delete does not exist', error: true });
   }
 
   static updateRecipes(req, res) {
@@ -78,8 +78,9 @@ class Recipe {
       } else {
         db.sort(ascUpvotes);
       }
-      res.status(200).send({ recipes: db, error: false });
-    } else { res.status(200).send({ error: false, recipes: db }); }
+      return res.status(200).send({ recipes: db, error: false });
+    }
+    return res.status(200).send({ error: false, recipes: db });
   }
 }
 export default Recipe;
