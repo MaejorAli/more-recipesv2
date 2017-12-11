@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./server/bin/www --exec babel-node ./Server/bin/www",
-    "test": "mocha ./Server/tests/test.js --require babel-register",
-    "cover": "istanbul cover _mocha",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha ./Server/tests/test.js --require babel-register",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^11.3.0",
     "supertest": "^3.0.0"
   }
 }
