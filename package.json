@@ -4,7 +4,7 @@
   "description": "recipes project",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node ./Server/app.js",
+    "start": "node ./Server/app.js",
     "start:dev": "nodemon ./server/bin/www --exec babel-node ./Server/bin/www",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha ./Server/tests/test.js --require babel-register",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
