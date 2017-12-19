@@ -173,4 +173,116 @@ describe('test-cases for api routes', () => {
         });
     });
   });
+  describe('POST /api/v1/recipes/<recipeId>/reviews', () => {
+    it('responds with the right response when it adds a review to a particular recipe', (done) => {
+      const recipe = {
+        recipeName: 'Spaked Rosillary Dessert',
+        directions: 'It is a dessert',
+        ingredients: 'water and water',
+        reviews: 'simply delicious',
+      };
+      request(app)
+        .post('/api/v1/recipes/2/reviews')
+        .send(recipe)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done)
+        .expect((res) => {
+          const { message } = res.body;
+          expect(message).to.equal('Review successfully Posted');
+        });
+    });
+  });
+  describe('PUT /api/v1/recipes/<recipeId>', () => {
+    it('responds with the right response when it updates a particular recipe', (done) => {
+      const recipe = {
+        recipeName: 'Spaked Rosillary Dessert',
+        directions: 'It is a dessert',
+        ingredients: 'water and water',
+      };
+      request(app)
+        .put('/api/v1/recipes/2')
+        .send(recipe)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(201, done)
+        .expect((res) => {
+          const { message } = res.body;
+          expect(message).to.equal('Successfully Updated');
+        });
+    });
+  });
+  describe('GET /api/v1/recipes?sort=upvotes&order=des', () => {
+    it('returns with the right response when getting sorted recipes', (done) => {
+      request(app)
+        .get('/api/v1/recipes?sort=upvotes&order=des')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
+  });
+  describe('GET /api/v1/recipes?sort=upvotes&order=asc', () => {
+    it('returns with the right response when getting sorted recipes', (done) => {
+      request(app)
+        .get('/api/v1/recipes?sort=upvotes&order=asc')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, done);
+    });
+  });
+  describe('PUT /api/v1/recipes/<recipeId>', () => {
+    describe('errors are properly handled when a request is made to update/modify a recipe', () => {
+      it('responds with the right reponse when some request body field is null', (done) => {
+        const recipe = {
+          recipeName: 'Spaked Rosillary Dessert',
+          directions: 'It is a dessert',
+          ingredients: '',
+        };
+        request(app)
+          .put('/api/v1/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(400, done)
+          .expect((res) => {
+            const { error } = res.body;
+            expect(error).to.equal('A field does not contain any input');
+          });
+      });
+      it('responds with the right reponse when some request body field contains only whitespaces', (done) => {
+        const recipe = {
+          recipeName: 'Spaked Rosillary Dessert',
+          directions: '    ',
+          ingredients: 'water and water',
+        };
+        request(app)
+          .put('/api/v1/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(400, done)
+          .expect((res) => {
+            const { error } = res.body;
+            expect(error).to.equal('A field does not contain any input');
+          });
+      });
+      it('responds with the right reponse when some request body field contains only digits', (done) => {
+        const recipe = {
+          recipeName: 'Spaked Rosillary Dessert',
+          directions: 'It is a dessert',
+          ingredients: '234',
+        };
+        request(app)
+          .put('/api/v1/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(400, done)
+          .expect((res) => {
+            const { error } = res.body;
+            expect(error).to.equal('Only text can be inputed');
+          });
+      });
+    });
+  });
 });

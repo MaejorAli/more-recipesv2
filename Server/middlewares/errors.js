@@ -109,7 +109,7 @@ const checkInvalidModification = (req, res, next) => {
     }
   });
   if (isUndefined) {
-    return res.status(400).send({ error: 'Please fill in all fields' });
+    return res.status(400).send({ error: 'Invalid Input' });
   }
   if (isNull) {
     return res.status(400).send({ error: 'A field does not contain any input' });
