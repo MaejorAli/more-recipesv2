@@ -7,9 +7,6 @@ const alphaNumeric = (inputtxt) => {
 };
 
 const checkNullInput = (req, res, next) => {
-  if (req.method !== 'POST') {
-    return res.status(300).send({ message: 'Invalid request method' });
-  }
   let isUndefined = false;
   let isNull = false;
   let isString = true;
@@ -46,9 +43,6 @@ const checkNullInput = (req, res, next) => {
 };
 
 const checkInvalidReview = (req, res, next) => {
-  if (req.method !== 'POST') {
-    return res.status(400).send({ error: 'Invalid request method' });
-  }
   let isUndefined = false;
   let isNull = false;
   const { reviews } = req.body;
@@ -90,9 +84,6 @@ const checkInvalidModification = (req, res, next) => {
       modifiedFields.push(field);
     }
   });
-  if (modifiedFields.length === 0) {
-    return res.status(400).send({ error: 'Please fill in the properties you want to modify' });
-  }
   modifiedFields.forEach((info) => {
     if (info === undefined) {
       isUndefined = true;

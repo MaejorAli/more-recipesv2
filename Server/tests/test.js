@@ -61,9 +61,6 @@ describe('test-cases for api routes', () => {
           .expect(400, done)
           .expect((res) => {
             const { error } = res.body;
-            if (res.body.recipeName !== undefined) {
-              throw new Error('Invalid response');
-            }
             expect(error).to.equal('Invalid Input');
           });
       });
