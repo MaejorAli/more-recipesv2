@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    name: {
+    recipeName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

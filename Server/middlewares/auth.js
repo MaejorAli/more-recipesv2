@@ -8,10 +8,9 @@ const verifyToken = (req, res, next) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         return res.status(400).send({ error: 'Invalid token' });
-      } else {
-        req.decoded = decoded;
-        next();
       }
+      req.decoded = decoded;
+      next();
     });
   } else {
     return res.status(403).send({ error: 'You have to login First' });

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node ./Server/bin/www",
     "start:dev": "nodemon ./Server/bin/www --exec babel-node ./Server/bin/www",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha ./Server/tests/test.js --require babel-register",
+    "test": "nyc --reporter=html --reporter=text  mocha --timeout 250000 ./Server/tests/test.js --require babel-register",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -34,6 +34,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.1",
     "mocha": "^4.0.1",
@@ -54,6 +55,7 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "coveralls": "^3.0.0",
+    "dotenv": "^5.0.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",

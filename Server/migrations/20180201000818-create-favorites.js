@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) =>
     queryInterface.createTable('Favorites', {
       id: {
         allowNull: false,
@@ -37,8 +37,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
-  },
+    }),
+
   down: (queryInterface) => {
     queryInterface.dropTable('Favorites');
   },

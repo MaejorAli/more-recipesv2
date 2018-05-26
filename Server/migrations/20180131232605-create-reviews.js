@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) =>
     queryInterface.createTable('Reviews', {
       id: {
         primaryKey: true,
@@ -40,8 +40,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    });
-  },
+    }),
+
   down: (queryInterface) => {
     queryInterface.dropTable('Reviews');
   },

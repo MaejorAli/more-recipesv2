@@ -5,22 +5,21 @@ const { Reviews } = models;
 const { Favorites } = models;
 const { votes } = models;
 
+
 class Recipe {
   static addRecipe(req, res) {
     const {
-      name,
-      category,
-      description,
+      recipeName,
+      directions,
       ingredients,
     } = req.body;
-    const creatorId = req.decoded.userId;
+
     return Recipes
       .create({
-        name,
-        category,
-        description,
+        recipeName,
+        directions,
         ingredients,
-        creatorId,
+        creatorId: req.decoded.userId,
       })
       .then(recipe => res.status(200).send({ message: 'Success, recipe created', recipe }))
       .catch(error => res.status(400).send({ error: error.message }));
@@ -41,10 +40,10 @@ class Recipe {
         if (recipe.creatorId !== req.decoded.userId) {
           return res.status(403).send({ error: 'You cannot delete a recipe added by another user' });
         }
-        return recipe.destroy().then(res.status(200).send({ message: 'recipe successfully deleted' })).catch(error => res.status(500).send({ error: 'an error occured' }));
+        return recipe.destroy().then(res.status(200).send({ message: 'recipe successfully deleted' })).catch(error => res.status(500).send({ error: error.message }));
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${recipeId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${recipeId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: error.message });
@@ -84,7 +83,7 @@ class Recipe {
         return res.status(200).send({ message: 'Success', recipe });
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${recipeId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${recipeId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: error.message });
@@ -116,7 +115,7 @@ class Recipe {
           .catch(error => res.status({ error: error.message }));
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${recipeId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${recipeId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: error.message });
@@ -139,15 +138,14 @@ class Recipe {
           return res.status(404).send({ message: 'You cannot modify a recipe added by another User' });
         }
         recipe.updateAttributes({
-          name: req.body.name || recipe.name,
-          category: req.body.category || recipe.category,
-          description: req.body.description || recipe.description,
+          recipeName: req.body.recipeName || recipe.recipeName,
+          directions: req.body.directions || recipe.directions,
           ingredients: req.body.ingredients || recipe.ingredients,
         });
         return res.status(200).send({ message: 'recipe successfully modified' });
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${req.params.userId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${req.params.userId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: error.message });
@@ -202,7 +200,7 @@ class Recipe {
         }
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${req.params.userId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${req.params.userId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: `an error occured: ${error.message}` });
@@ -257,7 +255,7 @@ class Recipe {
         }
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${req.params.userId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${req.params.userId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: `an error occured: ${error.message}` });
@@ -312,7 +310,7 @@ class Recipe {
         }
       })
       .catch((error) => {
-        if (error.message === `invalid input syntax for uuid: \"${req.params.userId}\"`) {
+        if (error.message === `invalid input syntax for uuid: ${req.params.userId}`) {
           return res.status(400).send({ error: 'You sent an invalid Id,try better next time' });
         }
         return res.status(500).send({ error: error.message });
